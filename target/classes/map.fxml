@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Line?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="TickWatchUK1.TickWatchUK1.MapController"
+            styleClass="explorer-scroll" fitToWidth="true" hbarPolicy="NEVER">
+   <content>
+      <VBox styleClass="explorer-page" spacing="24">
+         <padding>
+            <Insets top="30" right="113" bottom="50" left="113" />
+         </padding>
+         <children>
+
+            <Button text="←  Back to home" styleClass="back-button" onAction="#onBack" />
+
+            <!-- ========== HEADER ========== -->
+            <HBox alignment="BOTTOM_LEFT">
+               <children>
+                  <VBox spacing="6">
+                     <children>
+                        <Label text="LIVE ACTIVITY EXPLORER" styleClass="eyebrow" />
+                        <Label text="What’s happening near you?" styleClass="headline" />
+                        <Label text="Search an area or use the filters to explore community reports." styleClass="subtitle" />
+                     </children>
+                  </VBox>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <HBox styleClass="counter-box" alignment="CENTER_LEFT" spacing="12">
+                     <children>
+                        <Label fx:id="countLabel" text="1,000" styleClass="counter-number" />
+                        <VBox>
+                           <children>
+                              <Label text="sightings" styleClass="counter-text" />
+                              <Label text="shown" styleClass="counter-text" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+
+            <!-- ========== SEARCH BAR ========== -->
+            <HBox styleClass="search-bar" alignment="CENTER_LEFT" spacing="14">
+               <children>
+                  <Label text="⌕" styleClass="search-icon" />
+                  <TextField fx:id="searchField" promptText="Search town, city or species"
+                             styleClass="search-field" HBox.hgrow="ALWAYS" />
+                  <ComboBox fx:id="speciesBox" styleClass="filter-box" prefWidth="150" />
+                  <ComboBox fx:id="timeBox" styleClass="filter-box" prefWidth="150" />
+               </children>
+            </HBox>
+
+            <!-- ========== MAP + DETAILS CARD ========== -->
+            <HBox styleClass="explorer-card">
+               <children>
+
+                  <!-- LEFT : map -->
+                  <VBox HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox styleClass="legend-bar" alignment="CENTER_LEFT" spacing="22">
+                           <children>
+                              <Circle radius="5" styleClass="legend-dot-multi" />
+                              <Label text="Multiple reports" styleClass="legend-text" />
+                              <Circle radius="5" styleClass="legend-dot-single" />
+                              <Label text="Single report" styleClass="legend-text" />
+                              <Region HBox.hgrow="ALWAYS" />
+                              <Label text="Approximate city locations" styleClass="legend-text" />
+                           </children>
+                        </HBox>
+
+                        <StackPane styleClass="map-area" prefHeight="480" minHeight="480" VBox.vgrow="ALWAYS">
+                           <children>
+                              <Pane fx:id="mapLayer" />
+                              <VBox styleClass="zoom-box" maxWidth="-Infinity" maxHeight="-Infinity"
+                                    StackPane.alignment="BOTTOM_LEFT">
+                                 <StackPane.margin>
+                                    <Insets left="16" bottom="16" />
+                                 </StackPane.margin>
+                                 <children>
+                                    <Button text="+" styleClass="zoom-button" onAction="#onZoomIn" />
+                                    <Button text="−" styleClass="zoom-button" onAction="#onZoomOut" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+
+                  <!-- RIGHT : report details -->
+                  <VBox styleClass="details-panel" prefWidth="320" minWidth="320" maxWidth="320">
+                     <children>
+                        <StackPane styleClass="tick-art-box" prefHeight="185" minHeight="185">
+                           <children>
+                              <Pane prefWidth="320" prefHeight="185" maxWidth="320" maxHeight="185">
+                                 <children>
+                                    <Circle centerX="165" centerY="100" radius="48" styleClass="tick-glow" />
+                                    <Ellipse centerX="160" centerY="105" radiusX="82" radiusY="26" rotate="28" styleClass="tick-ring" />
+                                    <Ellipse centerX="150" centerY="115" radiusX="62" radiusY="20" rotate="28" styleClass="tick-ring" />
+                                    <Line startX="132" startY="82" endX="95"  endY="66"  styleClass="tick-leg" />
+                                    <Line startX="95"  startY="66" endX="80"  endY="70"  styleClass="tick-leg" />
+                                    <Line startX="168" startY="100" endX="205" endY="100" styleClass="tick-leg" />
+                                    <Line startX="205" startY="100" endX="225" endY="108" styleClass="tick-leg" />
+                                    <Line startX="168" startY="108" endX="200" endY="122" styleClass="tick-leg" />
+                                    <Line startX="168" startY="92"  endX="198" endY="82"  styleClass="tick-leg" />
+                                    <Ellipse centerX="150" centerY="105" radiusX="27" radiusY="38" styleClass="tick-body" />
+                                    <Ellipse centerX="150" centerY="105" radiusX="17" radiusY="27" styleClass="tick-inner" />
+                                    <Circle centerX="152" centerY="66" radius="13" styleClass="tick-head" />
+                                 </children>
+                              </Pane>
+                              <Label text="COMMUNITY REPORT" styleClass="pill" StackPane.alignment="TOP_LEFT">
+                                 <StackPane.margin>
+                                    <Insets top="14" left="14" />
+                                 </StackPane.margin>
+                              </Label>
+                           </children>
+                        </StackPane>
+
+                        <VBox styleClass="details-body" spacing="14">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="8">
+                                 <children>
+                                    <Circle radius="4" styleClass="live-dot" />
+                                    <Label fx:id="ageLabel" text="1552 DAYS AGO" styleClass="meta-green" />
+                                    <Region HBox.hgrow="ALWAYS" />
+                                    <Label fx:id="reportIdLabel" text="REPORT #K4C1DA" styleClass="meta-dark" />
+                                 </children>
+                              </HBox>
+
+                              <VBox spacing="2">
+                                 <children>
+                                    <Label fx:id="speciesLabel" text="Marsh tick" styleClass="species-name" />
+                                    <Label fx:id="latinLabel" text="Ixodes apronophorus" styleClass="species-latin" />
+                                 </children>
+                              </VBox>
+
+                              <Region styleClass="divider" prefHeight="1" minHeight="1" maxHeight="1" />
+
+                              <HBox spacing="14" alignment="CENTER_LEFT">
+                                 <children>
+                                    <HBox spacing="10" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <StackPane styleClass="info-icon-box"><children><Label text="◎" styleClass="info-icon" /></children></StackPane>
+                                          <VBox>
+                                             <children>
+                                                <Label text="LOCATION" styleClass="info-caption" />
+                                                <Label fx:id="locationLabel" text="Manchester" styleClass="info-value" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox spacing="10" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <StackPane styleClass="info-icon-box"><children><Label text="▦" styleClass="info-icon" /></children></StackPane>
+                                          <VBox>
+                                             <children>
+                                                <Label text="DATE REPORTED" styleClass="info-caption" />
+                                                <Label fx:id="dateLabel" text="1 Aug 2022" styleClass="info-value" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+
+                              <Region styleClass="divider" prefHeight="1" minHeight="1" maxHeight="1" />
+
+                              <HBox styleClass="tip-box" spacing="12" alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label text="⛨" styleClass="tip-icon" />
+                                    <VBox spacing="2">
+                                       <children>
+                                          <Label text="Spotted one nearby?" styleClass="tip-title" />
+                                          <Label text="Check pets, clothing and skin after time outdoors." styleClass="tip-text" wrapText="true" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+
+                              <HBox spacing="12">
+                                 <children>
+                                    <Button text="◎  Directions" styleClass="directions-button" onAction="#onDirections" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
+                                    <Button text="⇪  Share" styleClass="share-button" onAction="#onShare" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
